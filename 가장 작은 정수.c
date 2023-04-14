@@ -1,5 +1,5 @@
-/*3¹ø »ç¿ëÀÚ·ÎºÎÅÍ 3°³ Á¤¼ö¸¦ ÀÐ¾î µéÀÎ ÈÄ¿¡
-if-else¹®À» »ç¿ëÇÏ¿© °¡Àå ÀÛÀº °ªÀ» °áÁ¤ÇÏ´Â ÇÁ·Î±×·¥À» ÀÛ¼ºÇÏ¶ó.*/
+/*3ë²ˆ ì‚¬ìš©ìžë¡œë¶€í„° 3ê°œ ì •ìˆ˜ë¥¼ ì½ì–´ ë“¤ì¸ í›„ì—
+if-elseë¬¸ì„ ì‚¬ìš©í•˜ì—¬ ê°€ìž¥ ìž‘ì€ ê°’ì„ ê²°ì •í•˜ëŠ” í”„ë¡œê·¸ëž¨ì„ ìž‘ì„±í•˜ë¼.*/
 
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
@@ -8,20 +8,23 @@ int main(void) {
 
 	int x, y, z;
 	int i;
-	i = 0;
+	
 
-	printf("3°³ÀÇ Á¤¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+	printf("3ê°œì˜ ì •ìˆ˜ë¥¼ ìž…ë ¥í•˜ì„¸ìš”.");
 	scanf("%d %d %d", & x, &y, &z);
 
-	if (x < y)
-	    i = x;
-		else if(x > y)
-			i = y;
 
-	if (z < i)
+	if (x <= y)
+		i = x;
+
+	else{
+		i = y;
+	}
+
+	if (z <= i)
 		i = z;
 
-	printf("Á¦ÀÏ ÀÛÀº Á¤¼ö´Â%d", i);
+	printf("ì œì¼ ìž‘ì€ ì •ìˆ˜ëŠ”%d", i);
 
 
 	return 0;
