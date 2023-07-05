@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <time.h>
 
-void fillArray(int array[5][5]) {
-    int remaining = 25;
+void Array(int array[5][5]) {
+    int max = 25;
 
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
-            int random_index = rand() % remaining;
+            int random_index = rand() % max;
 
             int row = i;
             int col = j;
@@ -23,7 +23,7 @@ void fillArray(int array[5][5]) {
 
             array[row][col] = random_index;
 
-            if (--remaining == 0) {
+            if (--max == 0) {
                 return;
             }
         }
@@ -35,7 +35,7 @@ int main() {
 
     srand(time(NULL));
 
-    fillArray(array);
+    Array(array);
 
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
