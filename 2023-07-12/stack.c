@@ -73,7 +73,7 @@ int getPriority(char operator) {
 }
 
 // 후위 표기법 변환 함수
-void backward notation(char* infixExpression, char* postfixExpression) {
+void backwardnotation(char* infixExpression, char* postfixExpression) {
     Stack stack;
     initialize(&stack);
 
