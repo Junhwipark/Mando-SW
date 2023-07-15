@@ -5,42 +5,42 @@
 
 #define MAX_SIZE 100
 
-// ½ºÅÃ ±¸Á¶Ã¼ Á¤ÀÇ
+// ìŠ¤íƒ êµ¬ì¡°ì²´ ì •ì˜
 typedef struct {
     int items[MAX_SIZE];
     int top;
 } Stack;
 
-// ½ºÅÃ ÃÊ±âÈ­
+// ìŠ¤íƒ ì´ˆê¸°í™”
 void initialize(Stack* stack) {
     stack->top = -1;
 }
 
-// ½ºÅÃÀÌ ºñ¾îÀÖ´ÂÁö È®ÀÎ
+// ìŠ¤íƒì´ ë¹„ì–´ìžˆëŠ”ì§€ í™•ì¸
 bool isEmpty(Stack* stack) {
     return (stack->top == -1);
 }
 
-// ½ºÅÃÀÌ °¡µæ Ã¡´ÂÁö È®ÀÎ
+// ìŠ¤íƒì´ ê°€ë“ ì°¼ëŠ”ì§€ í™•ì¸
 bool isFull(Stack* stack) {
     return (stack->top == MAX_SIZE - 1);
 }
 
-// ½ºÅÃ¿¡ µ¥ÀÌÅÍ »ðÀÔ
+// ìŠ¤íƒì— ë°ì´í„° ì‚½ìž…
 void push(Stack* stack, int value) {
     if (isFull(stack)) {
-        printf("½ºÅÃÀÌ °¡µæ Ã¡½À´Ï´Ù.\n");
+        printf("ìŠ¤íƒì´ ê°€ë“ ì°¼ìŠµë‹ˆë‹¤.\n");
         return;
     }
     stack->top++;
     stack->items[stack->top] = value;
 }
 
-// ½ºÅÃ¿¡¼­ µ¥ÀÌÅÍ »èÁ¦ ¹× ¹ÝÈ¯
+// ìŠ¤íƒì—ì„œ ë°ì´í„° ì‚­ì œ ë° ë°˜í™˜
 int pop(Stack* stack) {
     if (isEmpty(stack)) {
-        printf("½ºÅÃÀÌ ºñ¾îÀÖ½À´Ï´Ù.\n");
-        return -1;  // ¿À·ù °ª
+        printf("ìŠ¤íƒì´ ë¹„ì–´ìžˆìŠµë‹ˆë‹¤.\n");
+        return -1;  // ì˜¤ë¥˜ ê°’
     }
 
     int poppedItem = stack->items[stack->top];
@@ -49,17 +49,17 @@ int pop(Stack* stack) {
     return poppedItem;
 }
 
-// ½ºÅÃÀÇ ¸Ç À§ µ¥ÀÌÅÍ È®ÀÎ
+// ìŠ¤íƒì˜ ë§¨ ìœ„ ë°ì´í„° í™•ì¸
 int peek(Stack* stack) {
     if (isEmpty(stack)) {
-        printf("½ºÅÃÀÌ ºñ¾îÀÖ½À´Ï´Ù.\n");
-        return -1;  // ¿À·ù °ª
+        printf("ìŠ¤íƒì´ ë¹„ì–´ìžˆìŠµë‹ˆë‹¤.\n");
+        return -1;  // ì˜¤ë¥˜ ê°’
     }
 
     return stack->items[stack->top];
 }
 
-// ¿ì¼±¼øÀ§ ¹ÝÈ¯ ÇÔ¼ö
+// ìš°ì„ ìˆœìœ„ ë°˜í™˜ í•¨ìˆ˜
 int getPriority(char operator) {
     if (operator == '*' || operator == '/') {
         return 2;
@@ -72,8 +72,8 @@ int getPriority(char operator) {
     }
 }
 
-// ÈÄÀ§ Ç¥±â¹ý º¯È¯ ÇÔ¼ö
-void convertToPostfix(char* infixExpression, char* postfixExpression) {
+// í›„ìœ„ í‘œê¸°ë²• ë³€í™˜ í•¨ìˆ˜
+void backward notation(char* infixExpression, char* postfixExpression) {
     Stack stack;
     initialize(&stack);
 
@@ -92,7 +92,7 @@ void convertToPostfix(char* infixExpression, char* postfixExpression) {
             while (peek(&stack) != '(') {
                 postfixExpression[j++] = pop(&stack);
             }
-            pop(&stack);  // '(' Á¦°Å
+            pop(&stack);  // '(' ì œê±°
         }
         else {
             while (!isEmpty(&stack) && getPriority(symbol) <= getPriority(peek(&stack))) {
@@ -109,7 +109,7 @@ void convertToPostfix(char* infixExpression, char* postfixExpression) {
     postfixExpression[j] = '\0';
 }
 
-// ÈÄÀ§ Ç¥±â¹ýÀ» ÀÌ¿ëÇÏ¿© ¿¬»ê ¼öÇà ÇÔ¼ö
+// í›„ìœ„ í‘œê¸°ë²•ì„ ì´ìš©í•˜ì—¬ ì—°ì‚° ìˆ˜í–‰ í•¨ìˆ˜
 int evaluatePostfix(char* postfixExpression) {
     Stack stack;
     initialize(&stack);
@@ -140,7 +140,7 @@ int evaluatePostfix(char* postfixExpression) {
                 push(&stack, operand1 / operand2);
                 break;
             default:
-                printf("Àß¸øµÈ ¿¬»êÀÚÀÔ´Ï´Ù.\n");
+                printf("ìž˜ëª»ëœ ì—°ì‚°ìžìž…ë‹ˆë‹¤.\n");
                 break;
             }
         }
@@ -153,14 +153,14 @@ int main() {
     char infixExpression[MAX_SIZE];
     char postfixExpression[MAX_SIZE];
 
-    printf("¼ö½ÄÀ» ÀÔ·ÂÇÏ¼¼¿ä: ");
+    printf("ìˆ˜ì‹ì„ ìž…ë ¥í•˜ì„¸ìš”: ");
     fgets(infixExpression, MAX_SIZE, stdin);
 
     convertToPostfix(infixExpression, postfixExpression);
-    printf("ÈÄÀ§ Ç¥±â¹ý: %s\n", postfixExpression);
+    printf("í›„ìœ„ í‘œê¸°ë²•: %s\n", postfixExpression);
 
     int result = evaluatePostfix(postfixExpression);
-    printf("°á°ú: %d\n", result);
+    printf("ê²°ê³¼: %d\n", result);
 
     return 0;
 }
