@@ -44,7 +44,7 @@ void read_sonar_sensor(void)
 }
 
 bool condition = false;
-int te = 0;
+int rt = 0;
 
 void setup() {
   pinMode(L_InPin_2, OUTPUT);
@@ -96,7 +96,7 @@ int read_line_sensor(void)
 void keep_line_going(void) // 라인에 따른 주행
 {
   int te = read_line_sensor();
-  switch(te)
+  switch(rt)
   {
     case -5 : Motor_Control_left(1,200); break;
     case -4 : Motor_Control_left(1,200); break;
@@ -119,9 +119,9 @@ void keep_line_going(void) // 라인에 따른 주행
 
 void keep_sensor_going(void) 
 {
-  int te = read_line_sensor();
+  int rt = read_line_sensor();
   
-  if(te == 100)
+  if(rt == 100)
   {
 
     if(UltraSonicData_F <= 700 && UltraSonicData_F >= 500 && UltraSonicData_R > 1000 ) 
