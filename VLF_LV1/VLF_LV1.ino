@@ -254,8 +254,7 @@ void loop()
   read_sonar_sensor();
   keep_line_going();
   keep_sensor_going();
-  // 여기에 주어진 블록을 추가하고 한 번만 실행하도록 조건을 체크
-  if (!condition && te != 100 && UltraSonicData_F < 450 && UltraSonicData_F > 0)
+  if (!condition && te != 100 && UltraSonicData_F < 450 && UltraSonicData_F > 0)// 한 번만 실행하도록 조건을 체크
   {
     condition = true;
 
