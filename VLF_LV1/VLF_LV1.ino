@@ -100,14 +100,14 @@ void keep_line_going(void) // 라인에 따른 주행
   {
     case -5 : Motor_Control_left(1,200); break;
     case -4 : Motor_Control_left(1,200); break;
-    case -3 : Motor_Control(1,0,100*2); break;
-    case -2 : Motor_Control(1,21*2,100*2); break;     
-    case -1 : Motor_Control(1,55*2,100*2); break;
-    case 10 : Motor_Control(1,200*2,112*2); break;
-    case 100 : Motor_Control(1,84*2,100*2); break;
-    case 1 : Motor_Control(1,84*2,65*2); break;
-    case 2 : Motor_Control(1,84*2,25*2); break;
-    case 3 : Motor_Control(1,84*2,0); break;
+    case -3 : Motor_Control(0,100*2); break;
+    case -2 : Motor_Control(21*2,100*2); break;     
+    case -1 : Motor_Control(55*2,100*2); break;
+    case 10 : Motor_Control(200*2,112*2); break;
+    case 100 : Motor_Control(84*2,100*2); break;
+    case 1 : Motor_Control(84*2,65*2); break;
+    case 2 : Motor_Control(84*2,25*2); break;
+    case 3 : Motor_Control(84*2,0); break;
     case 4 : Motor_Control_right(1,200); break;     
     case 5 : Motor_Control_right(1,200); break;
     case -10 : Stop(1); break;
@@ -126,9 +126,9 @@ void keep_sensor_going(void)
 
     if(UltraSonicData_F <= 700 && UltraSonicData_F >= 500 && UltraSonicData_R > 1000 ) 
     {
-      Motor_Control(1,77*2,10*2);
+      Motor_Control(77*2,10*2);
       delay(2000);
-      Motor_Control(1,90*2,100*2);
+      Motor_Control(90*2,100*2);
       delay(1000);
     }
 
@@ -136,32 +136,32 @@ void keep_sensor_going(void)
     {
       if(UltraSonicData_R + UltraSonicData_L <= 1170 && UltraSonicData_R - 70 <= UltraSonicData_L && UltraSonicData_R + 70 >= UltraSonicData_L) 
       {
-        Motor_Control(1,80*2,70*2);
+        Motor_Control(80*2,70*2);
       
       }
     
       else if( UltraSonicData_L < UltraSonicData_R) 
       {
-        Motor_Control(1,90*2,70*2);
+        Motor_Control(90*2,70*2);
         if(UltraSonicData_L < 200) 
         {
-         Motor_Control(1,10*2,0);
+         Motor_Control(10*2,0);
         }  
       }
 
       else if( UltraSonicData_L > UltraSonicData_R ) 
       {
-        Motor_Control(1,57*2,110*2);
+        Motor_Control(57*2,110*2);
       
         if(UltraSonicData_R < 200)
         {
-          Motor_Control(1,0,100*2);
+          Motor_Control(0,100*2);
         }   
       }
 
       else
       {
-        Motor_Control(1,90*2,100*2);
+        Motor_Control(90*2,100*2);
       }
     }
   } 
@@ -199,54 +199,14 @@ void Stop(int Time)
   delay(Time);
 }
   
-void Motor_Control(int Direction, int Speed1, int Speed2)
+void Motor_Control(int Speed1, int Speed2)
 {
-  switch(Direction){
-  case -1: // 후진
-    digitalWrite(L_InPin_2,HIGH);
-    digitalWrite(L_InPin_1,LOW);
-    digitalWrite(R_InPin_2,HIGH);
-    digitalWrite(R_InPin_1,LOW);
-    analogWrite(L_en, Speed1);
-    analogWrite(R_en, Speed2);
-  break;
-  
-  case 1: // 직진 
     digitalWrite(L_InPin_1,HIGH);
     digitalWrite(L_InPin_2,LOW);
     digitalWrite(R_InPin_2,HIGH);
     digitalWrite(R_InPin_1,LOW);
     analogWrite(L_en, Speed1);
     analogWrite(R_en, Speed2);
-  break;
-
-  case 0: // 정지
-    digitalWrite(L_InPin_1,HIGH);
-    digitalWrite(L_InPin_2,LOW);
-    digitalWrite(R_InPin_1,HIGH);
-    digitalWrite(R_InPin_2,LOW);
-    analogWrite(L_en, Speed1);
-    analogWrite(R_en, Speed2);
-  break;
-
-  case 2: // 우회전
-    digitalWrite(L_InPin_1,HIGH); 
-    digitalWrite(L_InPin_2,LOW);
-    digitalWrite(R_InPin_1,LOW);
-    digitalWrite(R_InPin_2,HIGH);
-    analogWrite(L_en, Speed1);
-    analogWrite(R_en, Speed2);
-  break;
-
-  case -2: // 좌회전
-    digitalWrite(L_InPin_1,LOW);
-    digitalWrite(L_InPin_2,HIGH);
-    digitalWrite(R_InPin_1,HIGH);
-    digitalWrite(R_InPin_2,LOW);
-    analogWrite(L_en, Speed1);
-    analogWrite(R_en, Speed2);
-  break;
-  }
 }
 
 void loop() 
@@ -254,13 +214,13 @@ void loop()
   read_sonar_sensor();
   keep_line_going();
   keep_sensor_going();
-  if (!condition && te != 100 && UltraSonicData_F < 450 && UltraSonicData_F > 0)// 한 번만 실행하도록 조건을 체크
+  if (!condition && te != 100 && UltraSonicData_F < 450 && UltraSonicData_F > 0)  // 한 번만 실행하도록 조건을 체크
   {
     condition = true;
 
-    Motor_Control(1, 87 * 2, 22 * 2);
+    Motor_Control(87 * 2, 22 * 2);
     delay(1500);
-    Motor_Control(1, 15 * 2, 94 * 2);
+    Motor_Control(15 * 2, 94 * 2);
     delay(2150);
   }
 }
